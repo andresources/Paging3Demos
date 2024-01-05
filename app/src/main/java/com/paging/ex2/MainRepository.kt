@@ -8,7 +8,7 @@ import androidx.paging.liveData
 import com.paging.ex1.PassengersDataSource
 import kotlinx.coroutines.flow.Flow
 
-class MainRepository constructor(private val retrofitService: RetrofitService) {
+class MainRepository constructor(private val retrofitService: RetrofitService = RetrofitService.getInstance()) {
 
     fun getAllMovies(): LiveData<PagingData<Movie>> {
 

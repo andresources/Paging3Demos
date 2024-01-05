@@ -16,6 +16,6 @@ class TestActivity : AppCompatActivity() {
 
     fun clickMe(view: View) {
         //ex2,ex4 working only
-        startActivity(Intent(this@TestActivity,Ex3Activity::class.java))
+        startActivity(Intent(this@TestActivity,MovieActivity::class.java))
     }
 }

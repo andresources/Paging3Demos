@@ -32,17 +32,12 @@ class MovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie)
-        val retrofitService = RetrofitService.getInstance()
-        val mainRepository = MainRepository(retrofitService)
         rv = findViewById(R.id.recyclerview)
         progressDialog= findViewById(R.id.progressDialog)
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
 
-        viewModel = ViewModelProvider(
-            this,
-            MyViewModelFactory(mainRepository)
-        ).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.errorMessage.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()

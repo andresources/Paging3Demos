@@ -39,9 +39,7 @@ class Ex3Activity : AppCompatActivity() {
     private fun setupView() {
         lifecycleScope.launch {
             viewModel.listData.collect {
-
                 mainListAdapter.submitData(it)
-                Toast.makeText(this@Ex3Activity,"${mainListAdapter.itemCount}",Toast.LENGTH_LONG).show()
             }
         }
     }

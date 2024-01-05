@@ -12,17 +12,10 @@ import com.paging.ex1.PassengersDataSource
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 
-class MainViewModel constructor(private val mainRepository: MainRepository) : ViewModel() {
-
+class MainViewModel : ViewModel() {
+    val mainRepository = MainRepository()
     val errorMessage = MutableLiveData<String>()
-
     fun getMovieList(): LiveData<PagingData<Movie>> {
         return mainRepository.getAllMovies().cachedIn(viewModelScope)
     }
-
-    fun getMV(): Flow<PagingData<Movie>> {
-        return mainRepository.getMV().cachedIn(viewModelScope)
-    }
-
-
 }
