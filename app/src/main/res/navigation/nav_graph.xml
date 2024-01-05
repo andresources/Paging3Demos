@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/passengersFragment">
+    <fragment
+        android:id="@+id/passengersFragment"
+        android:name="com.paging.ex1.PassengersFragment"
+        android:label="fragment_passengers"
+        tools:layout="@layout/fragment_passengers" />
+</navigation>
