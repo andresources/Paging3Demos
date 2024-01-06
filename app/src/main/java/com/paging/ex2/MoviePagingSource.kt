@@ -14,20 +14,13 @@ class MoviePagingSource(private val apiService: RetrofitService): PagingSource<I
         return try {
             val position = params.key ?: 1
             val response = apiService.getTopRatedMovies("e8d648003bd11b5c498674fbd4905525","en-US",position)
-            LoadResult.Page(data = response.body()!!.results, prevKey = if (position == 1) null else position - 1,
-                nextKey = position + 1)
+            LoadResult.Page(
+                data = response.body()!!.results,
+                prevKey = if (position == 1) null else position - 1,
+                nextKey = if (position < response.body()!!.total_pages) position + 1 else null
+            )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-
     }
-
-    @ExperimentalPagingApi
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
-    }
-
 }

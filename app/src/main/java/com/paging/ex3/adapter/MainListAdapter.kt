@@ -22,7 +22,7 @@ class MainListAdapter : PagingDataAdapter<Data, MainListAdapter.ViewHolder>(Data
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textViewName.text =
-            "${getItem(position)?.firstName} ${getItem(position)?.lastName}"
+            "${getItem(position)?.first_name} ${getItem(position)?.last_name}"
         holder.textViewEmail.text = getItem(position)?.email
 
     }

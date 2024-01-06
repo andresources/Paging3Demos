@@ -11,15 +11,16 @@ class PostDataSource(private val apiService: APIService) : PagingSource<Int, Dat
             val currentLoadingPageKey = params.key ?: 1
             val response = apiService.getListData(currentLoadingPageKey)
             val responseData = mutableListOf<Data>()
-            val data = response.body()?.myData ?: emptyList()
+            val data = response.body()?.data ?: emptyList()
+            val total_pages = response.body()!!.total_pages
             responseData.addAll(data)
 
-            val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
+            val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey.minus(1)
 
             return LoadResult.Page(
                 data = responseData,
                 prevKey = prevKey,
-                nextKey = currentLoadingPageKey.plus(1)
+                nextKey = if(currentLoadingPageKey < total_pages) currentLoadingPageKey.plus(1) else null
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

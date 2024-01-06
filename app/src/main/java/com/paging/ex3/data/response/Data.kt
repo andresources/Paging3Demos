@@ -1,16 +1,3 @@
 package com.paging.ex3.data.response
 
-import com.squareup.moshi.Json
-
-data class Data(
-    @Json(name = "avatar")
-    val avatar: String,
-    @Json(name = "email")
-    val email: String,
-    @Json(name = "first_name")
-    val firstName: String,
-    @Json(name = "id")
-    val id: Int,
-    @Json(name = "last_name")
-    val lastName: String
-)
+data class Data(val avatar: String, val email: String, val first_name: String, val id: Int, val last_name: String)

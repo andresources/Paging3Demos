@@ -9,11 +9,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paging.R
+import com.paging.ex1.PassengersLoadStateAdapter
 import com.paging.ex3.adapter.MainListAdapter
 import com.paging.ex3.data.APIService
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class Ex3Activity : AppCompatActivity() {
@@ -31,7 +34,11 @@ class Ex3Activity : AppCompatActivity() {
         rv.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            adapter = mainListAdapter
+            //adapter = mainListAdapter
+            adapter = mainListAdapter.withLoadStateHeaderAndFooter(
+                header = PassengersLoadStateAdapter { mainListAdapter.retry() },
+                footer = PassengersLoadStateAdapter { mainListAdapter.retry() }
+            )
         }
         setupView()
     }

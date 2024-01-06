@@ -3,11 +3,9 @@ package com.paging.ex2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -15,19 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paging.R
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class MovieActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
     lateinit var rv:RecyclerView
     lateinit var progressDialog: ProgressBar
+    //private val adapter = MoviePagerAdapterViewBinding()
     private val adapter = MoviePagerAdapter()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,19 +59,18 @@ class MovieActivity : AppCompatActivity() {
         }
 
 
-        lifecycleScope.launch {
+        /*lifecycleScope.launch {
             viewModel.getMovieList().observe(this@MovieActivity) {
                 it?.let {
                     adapter.submitData(lifecycle, it)
 
                 }
             }
-        }
-        /*lifecycleScope.launch {
+        }*/
+        lifecycleScope.launch {
             viewModel.getMV().collectLatest { pagedData ->
                 adapter.submitData(pagedData)
-                Toast.makeText(this@MovieActivity,"Size : ${adapter.itemCount}",Toast.LENGTH_LONG).show()
             }
-        }*/
+        }
     }
 }

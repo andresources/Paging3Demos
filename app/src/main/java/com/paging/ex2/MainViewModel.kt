@@ -18,4 +18,6 @@ class MainViewModel : ViewModel() {
     fun getMovieList(): LiveData<PagingData<Movie>> {
         return mainRepository.getAllMovies().cachedIn(viewModelScope)
     }
+
+    fun getMV(): Flow<PagingData<Movie>> = mainRepository.getMV().cachedIn(viewModelScope)
 }
